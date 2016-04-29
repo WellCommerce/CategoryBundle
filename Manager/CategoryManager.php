@@ -10,19 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
+namespace WellCommerce\Bundle\CategoryBundle\Manager;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Helper\Sluggable;
+use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
+use WellCommerce\Component\DataSet\Conditions\Condition\Eq;
+use WellCommerce\Component\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Class CategoryManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryManager extends AbstractAdminManager
+class CategoryManager extends AbstractManager
 {
     /**
      * Sorts categories passed in request
@@ -111,5 +114,18 @@ class CategoryManager extends AbstractAdminManager
         }
 
         return $slug;
+    }
+
+    /**
+     * Returns a collection of dynamic conditions
+     *
+     * @return ConditionsCollection
+     */
+    public function getCurrentCategoryConditions()
+    {
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Eq('category', $this->getCategoryContext()->getCurrentCategoryIdentifier()));
+
+        return $conditions;
     }
 }
