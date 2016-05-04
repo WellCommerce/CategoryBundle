@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Context\Front;
+namespace WellCommerce\Bundle\CategoryBundle\Storage;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 
@@ -19,25 +19,13 @@ use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CategoryContextInterface
+interface CategoryStorageInterface
 {
-    /**
-     * @param CategoryInterface $category
-     */
     public function setCurrentCategory(CategoryInterface $category);
 
-    /**
-     * @return CategoryInterface
-     */
     public function getCurrentCategory() : CategoryInterface;
 
-    /**
-     * @return int
-     */
     public function getCurrentCategoryIdentifier() : int;
 
-    /**
-     * @return bool
-     */
     public function hasCurrentCategory() : bool;
 }

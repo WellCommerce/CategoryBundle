@@ -10,41 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Context\Front;
+namespace WellCommerce\Bundle\CategoryBundle\Storage;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 
 /**
- * Class CategoryContext
+ * Class CategoryStorage
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryContext implements CategoryContextInterface
+final class CategoryStorage implements CategoryStorageInterface
 {
-    /**
-     * @var CategoryInterface
-     */
-    protected $currentCategory;
+    private $currentCategory;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrentCategory(CategoryInterface $category)
     {
         $this->currentCategory = $category;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentCategory() : CategoryInterface
     {
         return $this->currentCategory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentCategoryIdentifier() : int
     {
         if ($this->hasCurrentCategory()) {
@@ -54,9 +42,6 @@ class CategoryContext implements CategoryContextInterface
         return 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasCurrentCategory() : bool
     {
         return $this->currentCategory instanceof CategoryInterface;
